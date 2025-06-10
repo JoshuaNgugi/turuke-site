@@ -84,8 +84,8 @@ export default function Home() {
           <h3 className="text-3xl font-bold mb-12">Farmers Love Turuke</h3>
           <div className="bg-white p-6 rounded-xl shadow-md">
             <p className="text-gray-700 italic">
-              "Since using Turuke, I've doubled my tracking accuracy. It's like having a farm
-              assistant in my pocket!"
+              &quot;Since using Turuke, I&apos;ve doubled my tracking accuracy. It&apos;s like having a farm
+              assistant in my pocket!&quot;
             </p>
             <div className="mt-4 font-semibold text-purple-700">— Jane, Kiambu Farmer</div>
           </div>
