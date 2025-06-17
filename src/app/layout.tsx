@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Turuke",
   description: "Jumpstart your farm's efficiency",
+  icons: {
+    icon: '/hero-chicken-farm.svg'
+  }
 };
 
 export default function RootLayout({
