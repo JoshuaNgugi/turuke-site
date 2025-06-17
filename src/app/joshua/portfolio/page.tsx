@@ -1,27 +1,41 @@
 'use client'; // This directive marks the component as a Client Component
 
 import React from 'react';
-import { Code, Smartphone, Terminal, Rocket, Github, Mail, Linkedin, Atom, Type, Server, Database, Cloud, Package } from 'lucide-react';
+import { Code, Smartphone, Terminal, Rocket, Github, Mail, Linkedin, Atom, Type, Server, Database, Cloud, Package, GitBranch, LayoutDashboard, Component, FileDown } from 'lucide-react';
 
 // Header Component: Displays your name, title, and a brief description.
 const Header = () => (
-    <section id="home" className="py-20 bg-gradient-to-br from-emerald-50 to-white text-center rounded-b-3xl shadow-lg">
-        <div className="max-w-4xl mx-auto px-6">
-            <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
-                Joshua Ngugi
-            </h1>
-            <p className="mt-4 text-2xl text-emerald-700 font-semibold">
-                Software Engineer | Flutter & Full-Stack Developer
-            </p>
-            <p className="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
-                Building impactful tech for agriculture, finance, and scale with a focus on robust and user-centric solutions.
-            </p>
+    <section id="home" className="py-24 bg-gradient-to-br from-emerald-50 via-green-50 to-white text-center rounded-b-3xl shadow-lg">
+        <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center"> {/* Added flexbox for side-by-side layout */}
+            {/* Image on the left for larger screens, hidden on small screens */}
+            <div className="md:w-1/3 flex justify-center mb-8 md:mb-0 md:mr-8">
+                <img
+                    src="/images/prog.svg" // Using your uploaded image
+                    alt="Programming illustration"
+                    className="w-48 sm:w-64 md:w-full h-auto object-contain" // Responsive sizing and object-contain
+                    onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x250/e2e8f0/64748b?text=Illustration`; }}
+                />
+            </div>
+            {/* Text content */}
+            <div className="md:w-2/3 text-center md:text-left">
+                <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
+                    style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}> {/* Subtle text shadow for emphasis */}
+                    Joshua Ngugi
+                </h1>
+                <p className="mt-4 text-2xl text-emerald-700 font-semibold">
+                    Software Engineer | Flutter & Full-Stack Developer
+                </p>
+                <p className="mt-8 text-lg text-gray-600"> {/* Removed max-w-2xl mx-auto from here to flow better with image */}
+                    With over six years dedicated to crafting robust software solutions, I specialize in full-stack development, data engineering, and leading technical teams to deliver high-performance applications. My expertise spans complex backend systems, intuitive user interfaces, and large-scale data management, consistently driving efficiency and innovation in fast-paced environments.
+                </p>
+            </div>
         </div>
     </section>
 );
 
 // DetailCard Component: A reusable card for displaying project or experience details, including images.
-const DetailCard = ({ title, description, link, linkText, icon: IconComponent, imageUrls, role }) => (
+// Now accepts 'imageCategories' for organized screenshots.
+const DetailCard = ({ title, description, link, linkText, icon: IconComponent, imageCategories, role }) => (
     <div className="p-8 bg-white rounded-xl border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col h-full">
         <h3 className="text-2xl font-bold text-emerald-700 mb-3 flex items-center">
             {IconComponent && <IconComponent className="w-6 h-6 mr-3 text-emerald-600" />}
@@ -31,17 +45,24 @@ const DetailCard = ({ title, description, link, linkText, icon: IconComponent, i
         <p className="mt-2 text-gray-700 text-lg leading-relaxed flex-grow">
             {description}
         </p>
-        {imageUrls && imageUrls.length > 0 && (
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {imageUrls.map((url, index) => (
-                    <img
-                        key={index}
-                        src={url}
-                        alt={`Screenshot ${index + 1}`}
-                        className="w-full h-auto rounded-lg shadow-md object-cover"
-                        // Placeholder image fallbacks for better robustness
-                        onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x225/e2e8f0/64748b?text=Image+Load+Error`; }}
-                    />
+        {imageCategories && imageCategories.length > 0 && (
+            <div className="mt-6 space-y-6"> {/* Space between image categories */}
+                {imageCategories.map((category, catIndex) => (
+                    <div key={catIndex}>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">{category.title}</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {category.urls.map((url, imgIndex) => (
+                                <img
+                                    key={`${catIndex}-${imgIndex}`}
+                                    src={url}
+                                    alt={`${category.title} Screenshot ${imgIndex + 1}`}
+                                    className="w-full h-auto rounded-lg shadow-md object-cover"
+                                    // Placeholder image fallbacks for better robustness
+                                    onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x225/e2e8f0/64748b?text=Image+Load+Error`; }}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
         )}
@@ -78,13 +99,13 @@ const Footer = () => (
             <p className="mb-4 sm:mb-0">© {new Date().getFullYear()} Joshua Ngugi. All rights reserved.</p>
             <div className="flex space-x-6">
                 {/* Social media links */}
-                <a href="https://github.com/joshuangugi" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="GitHub Profile">
+                <a href="https://github.com/JoshuaNgugi" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="GitHub Profile">
                     <Github className="w-6 h-6" />
                 </a>
-                <a href="mailto:ngugijoshua93@gmail.com" className="hover:text-white transition-colors duration-200" aria-label="Email Me">
+                <a href="mailto:joshuamwaurangugi@gmail.com" className="hover:text-white transition-colors duration-200" aria-label="Email Me">
                     <Mail className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/joshua-ngugi-190666244/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/joshua-ngugi/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="LinkedIn Profile">
                     <Linkedin className="w-6 h-6" />
                 </a>
             </div>
@@ -122,23 +143,42 @@ export default function PortfolioPage() {
                     <div className="grid md:grid-cols-2 gap-10">
                         {/* Allied Commerce Experience */}
                         <DetailCard
-                            title="Allied Commerce"
-                            role="Software Engineer"
-                            description="Developed and maintained the Krossroads app, a comprehensive business management solution. Led the development of robust backend APIs and scalable mobile features, focusing on performance and user experience."
-                            link="https://play.google.com/store/apps/details?id=com.alliedcommerce.seller.pos&hl=en"
+                            title="Allied Commerce Ltd"
+                            role="Software Team Lead | Software Engineer"
+                            description="I led the end-to-end development and scaling of the Krossroads POS application, a critical business solution that achieved over 10,000 downloads across iOS and Android. My work involved significant backend engineering with Java/Spring Boot, optimizing PostgreSQL databases, and implementing sophisticated real-time data synchronization pipelines using Debezium for millions of records. I champion Test-Driven Development (TDD), achieving 98% test coverage and leading CI/CD initiatives that slashed production bugs by 20%. As a team lead, I mentored junior developers, fostering collaboration and ensuring high code quality."
+                            link="https://play.google.com/store/apps/details?id=com.krossroads"
                             linkText="View Krossroads on Play Store"
                             icon={Terminal}
-                            imageUrls={[
-                                "/images/krossroads-web-dashboard.jpg",
-                                "/images/krossroads-login.jpg",
+                            imageCategories={[
+                                {
+                                    title: "Smartphone",
+                                    urls: [
+                                        "/images/krossroads-mobile-dashboard-1.jpg",
+                                        "/images/krossroads-mobile-checkout.jpg",
+                                    ],
+                                },
+                                {
+                                    title: "Web Page",
+                                    urls: [
+                                        "/images/krossroads-web-dashboard.jpg",
+                                        "/images/krossroads-web-checkout.jpg",
+                                    ],
+                                },
                             ]}
                         />
                         {/* Ellixar Experience */}
                         <DetailCard
-                            title="Ellixar"
-                            role="Flutter & Full-Stack Developer"
-                            description="Successfully migrated an Android POS system to Flutter under tight deadlines. Implemented timezone-sensitive reporting for US clients and integrated Stripe & CardConnect APIs. Mentored junior developers during the transition, ensuring smooth adoption of new technologies."
+                            title="Ellixar Technologies"
+                            role="Android Developer Team Lead"
+                            description="I spearheaded a team developing enterprise-grade native Android applications, notably the Adrian Visitor and Leave Management apps, which achieved 90%+ user adoption. I focused on optimizing UI performance and building robust backend integrations with RESTful APIs and SQLite, ensuring reliable data management and seamless user experiences."
                             icon={Smartphone}
+                            imageCategories={[
+                                {
+                                    urls: [
+                                        "/images/app-data.svg",
+                                    ],
+                                },
+                            ]}
                         />
                     </div>
                 </div>
@@ -151,25 +191,42 @@ export default function PortfolioPage() {
                         Featured Projects
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {/* Turuke Project */}
+                        {/* Internal Admin Portal (Allied Commerce) */}
                         <DetailCard
-                            title="Turuke"
-                            description="A Flutter-based poultry farm management app with offline-first support, egg production analytics, and comprehensive health tracking. Designed for scalability and reliability, empowering farmers with real-time insights."
+                            title="Internal Admin Portal (Allied Commerce)"
+                            description="I developed a secure internal admin portal with a React frontend and an Express.js (Node.js) backend, enabling critical monitoring of terminal metrics and user logs. This project was instrumental in optimizing data access workflows for operational teams."
+                            icon={LayoutDashboard}
+                        />
+                        {/* Turuke App */}
+                        <DetailCard
+                            title="Turuke App – Founder & Developer"
+                            description="As founder, I'm building a full-stack platform for rural poultry farmers, featuring a Flutter mobile app and a Node.js/PostgreSQL backend. This project highlights my expertise in ETL processes, data migration (Flyway), and designing scalable analytics for agricultural data, optimized for low-connectivity environments."
                             link="https://github.com/JoshuaNgugi/turuke-mobile"
                             linkText="View on Play Store"
                             icon={Smartphone}
-                            imageUrls={[
-                                "/images/turuke-dashboard.jpg",
-                                "/images/turuke-drawer.jpg",
+                            imageCategories={[
+                                {
+                                    title: "Smartphone",
+                                    urls: [
+                                        "/images/turuke-dashboard.jpg",
+                                        "/images/turuke-drawer.jpg",
+                                    ],
+                                },
                             ]}
                         />
                         {/* Moolah Check Project */}
                         <DetailCard
                             title="Moolah Check"
-                            description="A MERN (MongoDB, Express.js, React, Node.js) stack personal expense tracker featuring interactive Chart.js data visualizations and a mobile-first responsive design. Provides intuitive financial oversight for better budget management."
+                            description="I created a full-stack expense tracking web app using React, Node.js, and MongoDB. This project showcases my skills in dynamic data visualization with Chart.js, building secure RESTful APIs with JWT authentication, and delivering intuitive user dashboards."
                             link="https://github.com/JoshuaNgugi/moolah-check"
                             linkText="View GitHub Repo"
                             icon={Code}
+                        />
+                        {/* Ingram Book Inventory Migration */}
+                        <DetailCard
+                            title="Ingram Book Inventory Migration"
+                            description="I successfully executed a critical data migration, transferring an 8GB legacy Ingram Book inventory file into the database. This achievement enabled seamless access to large-scale product data, supporting real-time inventory workflows and highlighting my capability in handling significant data volumes."
+                            icon={FileDown}
                         />
                     </div>
                 </div>
@@ -184,13 +241,21 @@ export default function PortfolioPage() {
                         <SkillItem icon={Atom} name="React.js" />
                         <SkillItem icon={Terminal} name="Node.js" />
                         <SkillItem icon={Server} name="Express.js" />
-                        <SkillItem icon={Code} name="Java & Spring" />
+                        <SkillItem icon={Code} name="Java & Spring Boot" />
                         <SkillItem icon={Rocket} name="PostgreSQL" />
                         <SkillItem icon={Database} name="MongoDB" />
                         <SkillItem icon={Type} name="TypeScript" />
                         <SkillItem icon={Cloud} name="AWS" />
                         <SkillItem icon={Package} name="Docker" />
                         <SkillItem icon={Github} name="Git/GitHub" />
+                        <SkillItem icon={Database} name="Debezium" />
+                        <SkillItem icon={Code} name="TDD" />
+                        <SkillItem icon={GitBranch} name="CI/CD" />
+                        <SkillItem icon={Server} name="RESTful APIs" />
+                        <SkillItem icon={Database} name="SQLite" />
+                        <SkillItem icon={Component} name="Chart.js" />
+                        <SkillItem icon={FileDown} name="Flyway" />
+                        <SkillItem icon={Package} name="ETL Processes" />
                     </div>
                 </div>
             </section>
