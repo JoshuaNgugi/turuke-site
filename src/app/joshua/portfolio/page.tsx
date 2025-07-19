@@ -8,7 +8,7 @@ const CONTACT_INFO = {
     email: "joshuamwaurangugi@gmail.com",
     github: "https://github.com/JoshuaNgugi",
     linkedin: "https://www.linkedin.com/in/joshua-ngugi/",
-    turukeMobile: "https://github.com/JoshuaNgugi/turuke-mobile", // Change this for Play Store
+    turukeMobile: "https://github.com/JoshuaNgugi/turuke-mobile",
     moolahCheckGithub: "https://github.com/JoshuaNgugi/moolah-check",
     krossroadsPlayStore: "https://play.google.com/store/apps/details?id=com.alliedcommerce.seller.pos&hl=en"
 };
@@ -22,13 +22,13 @@ interface ImageCategory {
 // Define an interface for the DetailCard props
 interface DetailCardProps {
     title: string;
-    description: string[]; // Changed to array of strings for bullet points
-    link?: string; // Optional link
-    linkText?: string; // Optional link text
-    icon?: React.ElementType; // Icon component (from lucide-react)
-    imageCategories?: ImageCategory[]; // Optional array of image categories
-    role?: string; // Optional role for work experience
-    duration?: string; // Optional duration for work experience
+    description: string[];
+    link?: string;
+    linkText?: string;
+    icon?: React.ElementType;
+    imageCategories?: ImageCategory[];
+    role?: string;
+    duration?: string;
 }
 
 // Define interfaces for structured data
@@ -54,6 +54,13 @@ interface ProjectItem {
     imageCategories?: ImageCategory[];
 }
 
+// Helper function to convert Markdown bold (**) to HTML strong tags
+const formatDescription = (descriptionArray: string[]): string[] => {
+    return descriptionArray.map(point =>
+        point.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    );
+};
+
 // Data for Work Experience
 const workExperienceData: ExperienceItem[] = [
     {
@@ -61,17 +68,16 @@ const workExperienceData: ExperienceItem[] = [
         title: "Allied Commerce Ltd",
         role: "Software Team Lead / Software Engineer",
         duration: "Feb 2023 – Present / Jun 2019 – Jan 2023",
-        description: [
-            "Led the design, development, and maintenance of critical Java/Spring Boot backend services, implementing a microservices architecture that powered the Krossroads POS ecosystem, ensuring high availability and scalability for over 10,000 users.",
-            "Applied stringent information security principles in developing secure APIs for payment integrations (Stripe, WorldPay, CardConnect), safeguarding personal and transactional data, and ensuring compliance.",
-            "Expertly managed PostgreSQL databases, optimizing stored procedures, performing complex large-scale data transfers, for example, migrating a compressed 8GB Ingram file containing more than 10 million records to database, and implementing real-time data synchronization solutions using Debezium.",
-            "Applied principles of software engineering to the design, development, and testing of new features. Directed comprehensive software testing strategies, including Test-Driven Development (TDD) using Junit and Mockito, achieving 98% test coverage to ensure robust and reliable Java applications.",
-            "Actively participated in Agile sprint planning, daily stand-ups, and retrospectives, coordinating seamlessly with cross-functional teams.",
-            "Documented work clearly and understandably for future use, including API specifications and system architecture.",
-            "Designed solutions to support high transaction volumes and optimized application performance, reducing average screen load time by 24% for integrated mobile frontends, ensuring efficient service delivery.",
-            "Provided guidance and mentorship to 3 junior developers, elevating team capabilities.",
-            "Led rigorous code reviews to maintain a high bar for code quality, adherence to best practices, and knowledge sharing."
-        ],
+        description: formatDescription([
+            "**Software Development Lifecycle & Engineering Excellence:** Led the design, development, and maintenance of critical Java/Spring Boot backend services, implementing a microservices architecture that powered the Krossroads POS ecosystem, ensuring high availability and scalability for over 10,000 users. Applied stringent information security principles in developing secure APIs for payment integrations (Stripe, WorldPay, CardConnect), safeguarding personal and transactional data, and ensuring compliance.",
+            "**Architecture & System Design:** Expertly managed PostgreSQL databases, optimizing stored procedures, performing complex large-scale data transfers (e.g., migrating a compressed 8GB Ingram file containing more than 10 million records), and implementing real-time data synchronization solutions using Debezium. Designed and implemented a sophisticated two-tier microservice backend (RPC and CDC tiers with Debezium, Kafka, Docker, and Firebase) for real-time data synchronization and push notifications.",
+            "**Technical Leadership & Team Empowerment:** Led a team of 4 junior developers, fostering a collaborative and high-performing environment. Conducted thorough code reviews, provided constructive feedback, and ensured adherence to high coding standards and best practices. Actively mentored junior and mid-level engineers, supporting their professional growth and technical skill development.",
+            "**Strategic Product Management & Market Impact:** Directly oversaw the Krossroads Point-of-Sale (POS) product suite from concept to deployment, including its successful market launch. The product achieved significant success across the United States (Washington, California), Singapore, and Europe, culminating in its acquisition by Boston-based WHF.",
+            "**Specialized Expertise: Hardware Integration & Low-Level Communication:** Integrated Flutter mobile applications with native Android code for hardware-level communication with STAR Micronics receipt printers and Stripe card readers (USB & Bluetooth). Developed underlying Android code for intricate device I/O and bridged functionality to Dart via type-safe Pigeon platform channels. Implemented barcode scanner functionalities.",
+            "**Quality Assurance & Testing Automation:** Directed comprehensive software testing strategies, including Test-Driven Development (TDD) using JUnit and Mockito, achieving 98% test coverage. Developed automation tests using Appium to streamline testing processes.",
+            "**Cloud-Native Development & Infrastructure:** Integrated with Firebase for backend operations, authentication, and data storage, enabled by the CDC architecture. Actively advocated for and implemented CI/CD pipelines (e.g., GitHub Actions) and automation.",
+            "**Cross-Functional Collaboration & User-Centricity:** Actively participated in Agile sprint planning, daily stand-ups, and retrospectives, coordinating seamlessly with cross-functional teams. Conducted live demos for stakeholders and end-users (e.g., Montlake Food Market outlets in Seattle, USA) to gather direct feedback, which directly translated into feature updates and re-optimizations. Investigated and resolved difficult bugs and critical production issues efficiently."
+        ]),
         link: CONTACT_INFO.krossroadsPlayStore,
         linkText: "View Krossroads on Play Store",
         icon: Terminal,
@@ -97,17 +103,18 @@ const workExperienceData: ExperienceItem[] = [
         title: "Ellixar Technologies",
         role: "Android Developer Team Lead",
         duration: "Dec 2018 – Jun 2019",
-        description: [
-            "Led a dynamic team in developing native Android applications, integrating RESTful APIs using Java and SpringBoot for robust data management and achieving 90%+ user adoption.",
+        description: formatDescription([
+            "Led a dynamic team in developing enterprise-grade native Android applications, notably the Adrian Visitor and Leave Management apps, achieving 90%+ user adoption.",
+            "Integrated RESTful APIs using Java and SpringBoot for robust data management.",
             "Collaborated closely with clients to gather requirements and translate them into actionable development plans, consistently meeting and exceeding expectations.",
             "Optimized backend data processing and UI responsiveness by 15%, contributing to overall application performance.",
             "Designed user-friendly interfaces using MVC patterns, optimizing for usability and cross-device compatibility.",
             "Conducted unit and integration tests with JUnit and Espresso. Spearheaded app deployments to Google Play Store, ensuring robust performance and positive user reviews."
-        ],
+        ]),
         icon: Smartphone,
         imageCategories: [
             {
-                title: "App Overview", // Changed title for clarity
+                title: "App Overview",
                 urls: [
                     "/images/app-data.svg",
                 ],
@@ -121,12 +128,19 @@ const projectsData: ProjectItem[] = [
     {
         id: "turuke-app",
         title: "Turuke App – Founder & Developer",
-        description: [
-            "Engineered a Flutter mobile application for poultry management, demonstrating core functionalities for scalable, performant, and user-friendly mobile apps.",
-            "Developed and deployed the Node.js + PostgreSQL backend, which is Dockerized and hosted on AWS, showcasing hands-on experience with cloud-native deployment, scalable infrastructure, and backend development for a data-driven application."
-        ],
+        description: formatDescription([
+            "**Comprehensive Flock Management:** Allows farmers to effortlessly record and monitor essential data points for their poultry, including egg counts, vaccination schedules, feed consumption, and health statuses.",
+            "**Offline-First Capabilities:** Built with sqflite for local data persistence, ensuring seamless operation and data capture even in areas with unreliable internet connectivity—a critical feature for remote farm environments.",
+            "**Intuitive Data Visualization:** Leverages fl_chart to transform complex data into clear, engaging yield graphs and statistical summaries, enabling farmers to quickly identify trends, assess performance, and make informed decisions directly from their mobile devices.",
+            "**Streamlined Operations:** Designed to minimize manual record-keeping and provide real-time insights, saving farmers significant time and effort in managing their coops.",
+            "**Technical Architecture & My Role:** As the sole founder and developer, I was responsible for the entire software development lifecycle of Turuke, from ideation and architectural design to implementation, deployment, and ongoing maintenance.",
+            "**Mobile Frontend (Flutter/Dart):** Developed the cross-platform mobile application using Flutter and Dart, ensuring a consistent and fluid user experience on both Android and iOS devices. Implemented Provider for efficient and scalable state management. Architected the offline-first functionality with sqflite. Integrated fl_chart for dynamic and interactive data visualization.",
+            "**Backend & API Development (Node.js/PostgreSQL):** Engineered a robust and scalable Node.js backend to manage core business logic, user authentication, and synchronize data. Designed and implemented a PostgreSQL relational database. Developed efficient RESTful APIs.",
+            "**Cloud-Native Deployment & Infrastructure (AWS/Docker):** Successfully Dockerized the Node.js backend. Orchestrated the deployment and management of the Dockerized backend on Amazon Web Services (AWS), demonstrating practical experience with cloud infrastructure, ensuring high availability, scalability, and robust performance.",
+            "**Impact & Demonstrated Skills:** The Turuke project vividly demonstrates Full-Stack Proficiency, End-to-End Ownership, Problem-Solving & Innovation, Scalability & Performance, User-Centric Design, and Entrepreneurial Drive."
+        ]),
         link: CONTACT_INFO.turukeMobile,
-        linkText: "View on GitHub", // Changed link text as it's a GitHub link
+        linkText: "View on GitHub",
         icon: Smartphone,
         imageCategories: [
             {
@@ -141,20 +155,20 @@ const projectsData: ProjectItem[] = [
     {
         id: "momentum-app",
         title: "Momentum App – Proof of Concept Social Media Platform",
-        description: [
+        description: formatDescription([
             "A lean Flutter app demonstrating core functionalities for rich media sharing, built with strong emphasis on ownership, rapid iteration, and performance.",
             "Implemented secure Firebase Authentication, seamless media capture/selection, and efficient Firebase Storage/Firestore integration for scalable user-generated content."
-        ],
-        link: "https://github.com/JoshuaNgugi/momentum-app", // Assuming this is the correct repo link
+        ]),
+        link: "https://github.com/JoshuaNgugi/momentum-app",
         linkText: "View GitHub Repo",
-        icon: Rocket, // Changed icon to Rocket for a social media app
+        icon: Rocket,
     },
     {
         id: "moolah-check",
         title: "Moolah Check – Founder & Developer",
-        description: [
+        description: formatDescription([
             "Developed a full-stack expense tracking web app with a React frontend and Node.js/MongoDB backend, featuring secure APIs and dynamic data visualizations."
-        ],
+        ]),
         link: CONTACT_INFO.moolahCheckGithub,
         linkText: "View GitHub Repo",
         icon: Code,
@@ -162,52 +176,54 @@ const projectsData: ProjectItem[] = [
     {
         id: "internal-admin-portal",
         title: "Internal Admin Portal (Allied Commerce)",
-        description: [
+        description: formatDescription([
             "Developed a secure internal admin portal with a React frontend and an Express.js (Node.js) backend, enabling critical monitoring of terminal metrics and user logs.",
             "This project was instrumental in optimizing data access workflows for operational teams."
-        ],
+        ]),
         icon: LayoutDashboard,
     },
     {
         id: "ingram-book-migration",
         title: "Ingram Book Inventory Migration",
-        description: [
+        description: formatDescription([
             "Successfully executed a critical data migration, transferring an 8GB legacy Ingram Book inventory file into the database.",
             "This achievement enabled seamless access to large-scale product data, supporting real-time inventory workflows and highlighting my capability in handling significant data volumes."
-        ],
+        ]),
         icon: FileDown,
     },
 ];
 
 // Header Component: Displays your name, title, and a brief description.
 const Header = () => (
-    <section id="home" className="py-24 bg-gradient-to-br from-emerald-50 via-green-50 to-white text-center rounded-b-3xl shadow-lg">
-        <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center"> {/* Added flexbox for side-by-side layout */}
-            {/* Image on the left for larger screens, hidden on small screens */}
+    <section id="home" className="relative py-24 bg-gradient-to-br from-[#100F1A] via-gray-900 to-black text-white text-center rounded-b-3xl shadow-2xl overflow-hidden">
+        {/* Angled background effect */}
+        <div className="absolute inset-0 bg-zinc-900 transform -skew-y-3 origin-top-left"></div>
+        <div className="absolute inset-0 bg-zinc-800 transform skew-y-6 origin-bottom-right opacity-50"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center md:justify-between">
             <div className="md:w-1/3 flex justify-center mb-8 md:mb-0 md:mr-8">
                 <img
-                    src="/images/prog.svg" // Using your uploaded image
+                    src="/images/prog.svg"
                     alt="Programming illustration"
-                    className="w-48 sm:w-64 md:w-full h-auto object-contain rounded-full shadow-xl" // Responsive sizing and object-contain, added rounded-full and shadow
+                    className="w-48 sm:w-64 md:w-full h-auto object-contain rounded-full shadow-lg shadow-[#00F0FF]/50 animate-wave"
                     onError={(e) => {
-                        // Cast e.target to HTMLImageElement to access src and onerror properties
                         const target = e.target as HTMLImageElement;
-                        target.onerror = null; // Prevent infinite loop if fallback image also fails
-                        target.src = `https://placehold.co/400x250/e2e8f0/64748b?text=Image+Load+Error`;
+                        target.onerror = null;
+                        target.src = `https://placehold.co/400x250/1f2937/d1d5db?text=Image+Load+Error`;
                     }}
                 />
             </div>
-            {/* Text content */}
             <div className="md:w-2/3 text-center md:text-left">
-                <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
-                    style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}> {/* Subtle text shadow for emphasis */}
+                <h1 className="text-5xl sm:text-6xl font-orbitron font-extrabold text-[#00F0FF] leading-tight tracking-wide animate-glitch"
+                    data-text="Joshua Ngugi" // Used for glitch effect
+                    style={{ textShadow: '0 0 10px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.2)' }}>
                     Joshua Ngugi
                 </h1>
-                <p className="mt-4 text-2xl text-emerald-700 font-semibold">
+                <p className="mt-4 text-2xl text-[#FF00FF] font-inter font-semibold">
                     Software Engineer | Full-Stack Developer
                 </p>
-                <p className="mt-8 text-lg text-gray-600"> {/* Removed max-w-2xl mx-auto from here to flow better with image */}
-                    With over six years dedicated to crafting robust software solutions, I specialize in full-stack development, data engineering, and leading technical teams to deliver high-performance applications. My expertise spans complex backend systems, intuitive user interfaces, and large-scale data management, consistently driving efficiency and innovation in fast-paced environments.
+                <p className="mt-8 text-lg text-gray-300 font-inter leading-relaxed">
+                    I am a highly accomplished and results-driven Software Engineer with over 7 years of experience in designing, developing, and leading complex software solutions across mobile, web, and backend systems. My expertise spans the entire software development lifecycle, from initial concept and architectural design to deployment, post-launch optimization, and strategic product evolution. I excel in building scalable, secure, and user-centric applications, consistently translating intricate business needs into robust technical solutions. My work is defined by a commitment to engineering excellence, a passion for problem-solving, and a proven ability to lead and mentor high-performing teams.
                 </p>
             </div>
         </div>
@@ -215,91 +231,104 @@ const Header = () => (
 );
 
 // DetailCard Component: A reusable card for displaying project or experience details, including images.
-// Now accepts 'imageCategories' for organized screenshots and 'description' as string array for bullet points.
-const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkText, icon: IconComponent, imageCategories, role, duration }) => (
-    <div className="p-8 bg-white rounded-xl border border-gray-200 hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col h-full">
-        <h3 className="text-2xl font-bold text-emerald-700 mb-3 flex items-center">
-            {IconComponent && <IconComponent className="w-6 h-6 mr-3 text-emerald-600" />}
-            {title}
-        </h3>
-        {role && <p className="text-lg font-semibold text-gray-800 mb-1">{role}</p>}
-        {duration && <p className="text-md text-gray-600 mb-4">{duration}</p>} {/* Display duration */}
-        <ul className="mt-2 text-gray-700 text-lg leading-relaxed flex-grow list-disc pl-5 space-y-2"> {/* Added list styling */}
-            {description.map((point, index) => (
-                <li key={index}>{point}</li>
-            ))}
-        </ul>
-        {imageCategories && imageCategories.length > 0 && (
-            <div className="mt-6 space-y-6"> {/* Space between image categories */}
-                {imageCategories.map((category, catIndex) => (
-                    <div key={catIndex}>
-                        {category.title && <h4 className="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">{category.title}</h4>}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {category.urls.map((url, imgIndex) => (
-                                <img
-                                    key={`${catIndex}-${imgIndex}`}
-                                    src={url}
-                                    alt={`${category.title} Screenshot ${imgIndex + 1}`}
-                                    className="w-full h-auto rounded-lg shadow-md object-cover"
-                                    // Placeholder image fallbacks for better robustness
-                                    onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.onerror = null;
-                                        target.src = `https://placehold.co/400x225/e2e8f0/64748b?text=Image+Load+Error`;
-                                    }}
-                                />
+const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkText, icon: IconComponent, imageCategories, role, duration }) => {
+    const [showImages, setShowImages] = useState(false);
+
+    return (
+        <div className="relative p-8 bg-zinc-800 rounded-xl border border-[#3A3A4A] hover:border-[#00F0FF] hover:shadow-lg hover:shadow-[#00F0FF]/30 transition-all duration-300 ease-in-out transform hover:-translate-y-2 group">
+            <h3 className="text-3xl font-orbitron font-bold text-[#00F0FF] mb-3 flex items-center">
+                {IconComponent && <IconComponent className="w-8 h-8 mr-3 text-[#FF00FF] group-hover:animate-glitch-icon" />}
+                {title}
+            </h3>
+            {role && <p className="text-xl font-semibold text-gray-200 mb-1 font-inter">{role}</p>}
+            {duration && <p className="text-lg text-gray-400 mb-4 font-inter">{duration}</p>}
+            <ul className="mt-4 text-gray-300 text-lg leading-relaxed flex-grow list-disc pl-5 space-y-3 font-inter">
+                {description.map((point, index) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
+                ))}
+            </ul>
+
+            {imageCategories && imageCategories.length > 0 && (
+                <div className="mt-6">
+                    <button
+                        onClick={() => setShowImages(!showImages)}
+                        className="text-[#FF00FF] hover:text-[#00F0FF] transition-colors duration-200 flex items-center font-semibold mb-4"
+                    >
+                        {showImages ? 'Hide Visual Data [-]' : 'Access Visual Data [+]'}
+                    </button>
+                    {showImages && (
+                        <div className="space-y-6 animate-fade-in-images">
+                            {imageCategories.map((category, catIndex) => (
+                                <div key={catIndex}>
+                                    {category.title && <h4 className="text-xl font-orbitron font-semibold text-[#00FFFF] mb-3 border-b border-[#3A3A4A] pb-2">{category.title}</h4>}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {category.urls.map((url, imgIndex) => (
+                                            <img
+                                                key={`${catIndex}-${imgIndex}`}
+                                                src={url}
+                                                alt={`${category.title} Screenshot ${imgIndex + 1}`}
+                                                className="w-full h-auto rounded-lg shadow-md object-cover border border-[#3A3A4A]"
+                                                loading="lazy"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.onerror = null;
+                                                    target.src = `https://placehold.co/400x225/1f2937/d1d5db?text=Image+Load+Error`;
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                             ))}
                         </div>
-                    </div>
-                ))}
-            </div>
-        )}
-        {link && (
-            <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer" // Security best practice for external links
-                className="mt-4 inline-flex items-center text-emerald-600 font-semibold hover:underline hover:text-emerald-800 transition-colors duration-200"
-            >
-                {linkText}
-                {/* External link icon */}
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-            </a>
-        )}
-    </div>
-);
+                    )}
+                </div>
+            )}
+
+            {link && (
+                <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center px-6 py-3 border border-[#00F0FF] text-[#00F0FF] font-semibold rounded-md shadow-lg shadow-[#00F0FF]/20 hover:bg-[#00F0FF] hover:text-[#100F1A] transition-all duration-300 font-inter group-hover:animate-pulse-light"
+                >
+                    {linkText}
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            )}
+        </div>
+    );
+};
 
 // Define an interface for the SkillItem props
 interface SkillItemProps {
-    icon?: React.ElementType; // Icon component (from lucide-react)
+    icon?: React.ElementType;
     name: string;
 }
 
 // SkillItem Component: A reusable item for displaying individual skills with an icon.
 const SkillItem: React.FC<SkillItemProps> = ({ icon: Icon, name }) => (
-    <div className="flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-        {/* Render icon if provided */}
-        {Icon && <Icon className="w-10 h-10 text-emerald-600 mb-3" />}
-        <span className="text-lg font-medium text-gray-800 text-center">{name}</span>
+    <div className="flex flex-col items-center p-4 bg-zinc-800 rounded-xl shadow-md shadow-zinc-700/30 hover:shadow-lg hover:shadow-[#00F0FF]/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 group relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#00F0FF] opacity-0 group-hover:opacity-10 transition-opacity duration-500 animate-pulse-slow rounded-xl"></div>
+        {Icon && <Icon className="w-10 h-10 text-[#00F0FF] mb-3 group-hover:animate-wiggle relative z-10" />}
+        <span className="text-lg font-medium text-gray-100 text-center font-inter relative z-10">{name}</span>
     </div>
 );
 
 // Footer Component: Contains copyright information and social media links.
 const Footer = () => (
-    <footer className="bg-gray-900 text-gray-300 text-sm py-8 px-6 rounded-t-3xl shadow-inner">
+    <footer className="bg-[#100F1A] text-gray-400 text-sm py-8 px-6 rounded-t-3xl shadow-inner shadow-[#00F0FF]/20">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-            <p className="mb-4 sm:mb-0">© {new Date().getFullYear()} Joshua Ngugi</p>
+            <p className="mb-4 sm:mb-0 font-inter">© {new Date().getFullYear()} Joshua Ngugi</p>
             <div className="flex space-x-6">
-                {/* Social media links */}
-                <a href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="GitHub Profile">
+                <a href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF] transition-colors duration-200" aria-label="GitHub Profile">
                     <Github className="w-6 h-6" />
                 </a>
-                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-white transition-colors duration-200" aria-label="Email Me">
+                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-[#00F0FF] transition-colors duration-200" aria-label="Email Me">
                     <Mail className="w-6 h-6" />
                 </a>
-                <a href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200" aria-label="LinkedIn Profile">
+                <a href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF] transition-colors duration-200" aria-label="LinkedIn Profile">
                     <Linkedin className="w-6 h-6" />
                 </a>
             </div>
@@ -307,8 +336,8 @@ const Footer = () => (
     </footer>
 );
 
-// SectionWrapper for fade-in animation
-const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; className?: string; onIntersect: (id: string) => void }> = ({ id, children, className, onIntersect }) => {
+// SectionWrapper for fade-in animation and angled backgrounds
+const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; className?: string; onIntersect: (id: string) => void; skew?: number; bgColor?: string }> = ({ id, children, className, onIntersect, skew = 0, bgColor = 'bg-zinc-950' }) => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -317,13 +346,13 @@ const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; classNam
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    onIntersect(id); // Notify parent about intersection
+                    onIntersect(id);
                 } else {
                     // Optional: If you want it to fade out when scrolling away
                     // setIsVisible(false);
                 }
             },
-            { threshold: 0 } // Changed threshold to 0 for better mobile visibility
+            { threshold: 0.1 }
         );
 
         if (sectionRef.current) {
@@ -341,22 +370,28 @@ const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; classNam
         <section
             id={id}
             ref={sectionRef}
-            className={`${className} transition-opacity duration-1000 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            className={`relative ${className} transition-opacity duration-1000 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'} overflow-hidden`}
         >
-            {children}
+            {/* Angled background layer */}
+            {skew !== 0 && (
+                <div className={`absolute inset-0 ${bgColor} transform ${skew > 0 ? `skew-y-${skew}` : `-skew-y-${Math.abs(skew)}`} origin-top-left`}></div>
+            )}
+            <div className="relative z-10">
+                {children}
+            </div>
         </section>
     );
 };
 
 
 // Main PortfolioPage Component
-export default function PortfolioPage() {
+export default function App() { // Changed to App for default export
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
     const handleScroll = () => {
-        if (window.scrollY > 300) { // Show button after scrolling 300px
+        if (window.scrollY > 300) {
             setShowScrollToTop(true);
         } else {
             setShowScrollToTop(false);
@@ -377,8 +412,11 @@ export default function PortfolioPage() {
     }, []);
 
     return (
-        <div className="bg-gray-50 text-gray-800 font-sans antialiased">
-            {/* Define custom keyframes for the fade-in animation */}
+        <div className="bg-[#100F1A] text-gray-100 font-inter antialiased">
+            {/* Google Fonts Import */}
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+            {/* Define custom keyframes for animations */}
             <style jsx global>{`
                 @keyframes fadeIn {
                     from { opacity: 0; transform: translateY(20px); }
@@ -387,24 +425,126 @@ export default function PortfolioPage() {
                 .animate-fade-in {
                     animation: fadeIn 0.3s ease-out forwards;
                 }
+
+                @keyframes wave {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(0.5deg); } /* Reduced rotation */
+                    50% { transform: rotate(-0.5deg); } /* Reduced rotation */
+                    75% { transform: rotate(0.2deg); } /* Reduced rotation */
+                }
+                .animate-wave {
+                    animation: wave 4s ease-in-out infinite; /* Increased duration for slower shake */
+                }
+
+                @keyframes wiggle {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(-5deg); }
+                    50% { transform: rotate(5deg); }
+                    75% { transform: rotate(-2deg); }
+                }
+                .group-hover\\:animate-wiggle:hover {
+                    animation: wiggle 0.5s ease-in-out;
+                }
+
+                @keyframes glitch {
+                    0% {
+                        text-shadow: 0.05em 0 0 rgba(0, 240, 255, 0.75), -0.02em -0.04em 0 rgba(255, 0, 255, 0.75), 0.025em 0.05em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    14% {
+                        text-shadow: 0.05em 0 0 rgba(0, 240, 255, 0.75), -0.02em -0.04em 0 rgba(255, 0, 255, 0.75), 0.025em 0.05em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    15% {
+                        text-shadow: -0.05em -0.025em 0 rgba(0, 240, 255, 0.75), 0.02em 0.03em 0 rgba(255, 0, 255, 0.75), -0.04em -0.02em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    49% {
+                        text-shadow: -0.05em -0.025em 0 rgba(0, 240, 255, 0.75), 0.02em 0.03em 0 rgba(255, 0, 255, 0.75), -0.04em -0.02em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    50% {
+                        text-shadow: 0.025em 0.035em 0 rgba(0, 240, 255, 0.75), 0.03em 0 0 rgba(255, 0, 255, 0.75), 0 -0.04em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    99% {
+                        text-shadow: 0.025em 0.035em 0 rgba(0, 240, 255, 0.75), 0.03em 0 0 rgba(255, 0, 255, 0.75), 0 -0.04em 0 rgba(0, 255, 255, 0.75);
+                    }
+                    100% {
+                        text-shadow: 0 0 10px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.2); /* Return to normal neon glow */
+                    }
+                }
+                .animate-glitch {
+                    animation: glitch 2s linear infinite alternate;
+                }
+
+                @keyframes blink-caret {
+                    from, to { border-right-color: transparent }
+                    50% { border-right-color: #00F0FF; }
+                }
+
+                .blinking-cursor {
+                    border-right: 2px solid #00F0FF;
+                    animation: blink-caret 0.75s step-end infinite;
+                }
+
+                @keyframes pulse-slow {
+                    0%, 100% { transform: scale(1); opacity: 0.1; }
+                    50% { transform: scale(1.05); opacity: 0.2; }
+                }
+                .animate-pulse-slow {
+                    animation: pulse-slow 2s infinite ease-in-out;
+                }
+
+                /* Custom 3D tilt on hover for DetailCard - removed for new hover */
+                /*
+                .group:hover .hover\\:rotate-x-5 {
+                    transform: rotateX(5deg);
+                }
+                .group:hover .hover\\:rotate-y-5 {
+                    transform: rotateY(5deg);
+                }
+                */
+
+                @keyframes glitch-icon {
+                    0%, 100% { transform: translate(0, 0); }
+                    20% { transform: translate(-2px, 2px); }
+                    40% { transform: translate(-2px, -2px); }
+                    60% { transform: translate(2px, 2px); }
+                    80% { transform: translate(2px, -2px); }
+                }
+                .group-hover\\:animate-glitch-icon:hover {
+                    animation: glitch-icon 0.3s cubic-bezier(.25,.46,.45,.94) infinite;
+                }
+
+                @keyframes pulse-light {
+                    0%, 100% { box-shadow: 0 0 10px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.2); }
+                    50% { box-shadow: 0 0 20px rgba(0,240,255,0.6), 0 0 30px rgba(0,240,255,0.4); }
+                }
+                .group-hover\\:animate-pulse-light:hover {
+                    animation: pulse-light 1.5s infinite alternate;
+                }
+
+                @keyframes fadeInImages {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in-images {
+                    animation: fadeInImages 0.5s ease-out forwards;
+                }
+
             `}</style>
 
             {/* Navigation Bar: Sticky to stay at the top while scrolling */}
-            <nav className="sticky top-0 z-50 bg-white shadow-md py-4 px-6">
+            <nav className="sticky top-0 z-50 bg-[#100F1A] shadow-lg shadow-[#00F0FF]/20 py-4 px-6 rounded-b-lg border-b border-[#3A3A4A]">
                 <div className="max-w-6xl mx-auto flex justify-between items-center">
-                    <span className="text-2xl font-bold text-emerald-700">Joshua Ngugi</span>
-                    <div className="space-x-6 hidden md:flex"> {/* Hidden on small screens, shown on medium and above */}
-                        <a href="#home" className={`text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium ${activeSection === 'home' ? 'text-emerald-600 font-bold' : ''}`}>Home</a>
-                        <a href="#work-experience" className={`text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium ${activeSection === 'work-experience' ? 'text-emerald-600 font-bold' : ''}`}>Work Experience</a>
-                        <a href="#projects" className={`text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium ${activeSection === 'projects' ? 'text-emerald-600 font-bold' : ''}`}>Projects</a>
-                        <a href="#skills" className={`text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium ${activeSection === 'skills' ? 'text-emerald-600 font-bold' : ''}`}>Skills</a>
-                        <a href="#contact" className={`text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium ${activeSection === 'contact' ? 'text-emerald-600 font-bold' : ''}`}>Contact</a>
+                    <span className="text-2xl font-orbitron font-bold text-[#00F0FF]">Joshua Ngugi</span>
+                    <div className="space-x-6 hidden md:flex">
+                        <a href="#home" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'home' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Home</a>
+                        <a href="#work-experience" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'work-experience' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Work Experience</a>
+                        <a href="#projects" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'projects' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Projects</a>
+                        <a href="#skills" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'skills' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Skills</a>
+                        <a href="#contact" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'contact' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Contact</a>
                     </div>
-                    {/* Mobile menu button */}
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="text-gray-700 hover:text-emerald-600 focus:outline-none"
+                            className="text-gray-300 hover:text-[#00F0FF] focus:outline-none"
                             aria-label="Toggle mobile menu"
                         >
                             {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
@@ -415,31 +555,32 @@ export default function PortfolioPage() {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 md:hidden animate-fade-in">
+                <div className="fixed inset-0 bg-[#100F1A] z-40 flex flex-col items-center justify-center space-y-8 md:hidden animate-fade-in">
                     <button
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="absolute top-6 right-6 text-gray-700 hover:text-emerald-600 focus:outline-none"
+                        className="absolute top-6 right-6 text-gray-300 hover:text-[#00F0FF] focus:outline-none"
                         aria-label="Close mobile menu"
                     >
                         <X className="w-8 h-8" />
                     </button>
-                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-emerald-700 hover:text-emerald-900 transition-colors duration-200">Home</a>
-                    <a href="#work-experience" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-emerald-700 hover:text-emerald-900 transition-colors duration-200">Work Experience</a>
-                    <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-emerald-700 hover:text-emerald-900 transition-colors duration-200">Projects</a>
-                    <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-emerald-700 hover:text-emerald-900 transition-colors duration-200">Skills</a>
-                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-emerald-700 hover:text-emerald-900 transition-colors duration-200">Contact</a>
+                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Home</a>
+                    <a href="#work-experience" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Work Experience</a>
+                    <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Projects</a>
+                    <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Skills</a>
+                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Contact</a>
                 </div>
             )}
 
             <Header />
 
             {/* Work Experience Section */}
-            <SectionWrapper id="work-experience" className="py-24 bg-gray-50" onIntersect={handleSectionIntersect}>
+            <SectionWrapper id="work-experience" className="py-24" onIntersect={handleSectionIntersect} skew={-2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-16">
-                        Work Experience
+                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                        <span className="relative z-10">Work Experience</span>
+                        <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#FF00FF] rounded-full animate-pulse-light"></span>
                     </h2>
-                    <div className="grid md:grid-cols-2 gap-10">
+                    <div className="space-y-20"> {/* Stacked layout with more vertical space */}
                         {workExperienceData.map((exp) => (
                             <DetailCard
                                 key={exp.id}
@@ -458,12 +599,13 @@ export default function PortfolioPage() {
             </SectionWrapper>
 
             {/* Projects Section */}
-            <SectionWrapper id="projects" className="py-24 bg-gray-50" onIntersect={handleSectionIntersect}>
+            <SectionWrapper id="projects" className="py-24" onIntersect={handleSectionIntersect} skew={2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-16">
-                        Featured Projects
+                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                        <span className="relative z-10">Personal Projects</span>
+                        <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#00FFFF] rounded-full animate-pulse-light"></span>
                     </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="space-y-20"> {/* Stacked layout with more vertical space */}
                         {projectsData.map((project) => (
                             <DetailCard
                                 key={project.id}
@@ -479,49 +621,52 @@ export default function PortfolioPage() {
                 </div>
             </SectionWrapper>
 
-            {/* Skills Section: Highlights core technical skills */}
-            <SectionWrapper id="skills" className="py-20 bg-emerald-50 text-center rounded-xl mx-auto max-w-7xl px-6 my-16 shadow-inner" onIntersect={handleSectionIntersect}>
-                <div className="max-w-5xl mx-auto">
-                    <h2 className="text-4xl font-extrabold mb-12 text-gray-900">Core Skills</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
-                        <SkillItem icon={Smartphone} name="Flutter" />
-                        <SkillItem icon={Atom} name="React.js" />
-                        <SkillItem icon={Terminal} name="Node.js" />
-                        <SkillItem icon={Server} name="Express.js" />
-                        <SkillItem icon={Code} name="Java & Spring Boot" />
-                        <SkillItem icon={Rocket} name="PostgreSQL" />
-                        <SkillItem icon={Database} name="MongoDB" />
-                        <SkillItem icon={Type} name="TypeScript" />
-                        <SkillItem icon={Cloud} name="AWS" />
-                        <SkillItem icon={Package} name="Docker" />
-                        <SkillItem icon={Github} name="Git/GitHub" />
-                        <SkillItem icon={Database} name="Debezium" />
-                        <SkillItem icon={Code} name="TDD" />
-                        <SkillItem icon={GitBranch} name="CI/CD" />
-                        <SkillItem icon={Server} name="RESTful APIs" />
-                        <SkillItem icon={Database} name="SQLite" />
-                        <SkillItem icon={Component} name="Chart.js" />
-                        <SkillItem icon={FileDown} name="Flyway" />
-                        <SkillItem icon={Package} name="ETL Processes" />
+            {/* Skills Section */}
+            <SectionWrapper id="skills" className="py-24" onIntersect={handleSectionIntersect} skew={-2} bgColor="bg-zinc-900">
+                <div className="max-w-6xl mx-auto px-6">
+                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                        <span className="relative z-10">Skills Matrix</span>
+                        <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#FF00FF] rounded-full animate-pulse-light"></span>
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"> {/* Adjusted grid for better spacing */}
+                        <SkillItem icon={Code} name="Java / Spring Boot" />
+                        <SkillItem icon={Smartphone} name="Flutter / Dart" />
+                        <SkillItem icon={Terminal} name="Node.js / Express.js" />
+                        <SkillItem icon={Database} name="PostgreSQL / MongoDB" />
+                        <SkillItem icon={Cloud} name="AWS / Docker" />
+                        <SkillItem icon={GitBranch} name="Git / GitHub" />
+                        <SkillItem icon={Type} name="TypeScript / JavaScript" />
+                        <SkillItem icon={LayoutDashboard} name="React / Next.js" />
+                        <SkillItem icon={Server} name="Microservices" />
+                        <SkillItem icon={Package} name="CI/CD" />
+                        <SkillItem icon={Atom} name="Agile Methodologies" />
+                        {/* Add more relevant skills */}
                     </div>
                 </div>
             </SectionWrapper>
 
-            {/* Contact Section: Provides a call to action for connecting */}
-            <SectionWrapper id="contact" className="py-20 bg-emerald-700 text-white text-center rounded-xl mx-auto max-w-5xl px-6 mb-16 shadow-2xl" onIntersect={handleSectionIntersect}>
-                <div className="max-w-3xl mx-auto">
-                    <h2 className="text-4xl font-extrabold">Let&apos;s Connect</h2>
-                    <p className="mt-4 text-xl leading-relaxed">
-                        I&apos;m currently open to new opportunities and exciting collaborations. Feel free to reach out!
+            {/* Contact Section */}
+            <SectionWrapper id="contact" className="py-24" onIntersect={handleSectionIntersect} skew={2} bgColor="bg-zinc-900">
+                <div className="max-w-6xl mx-auto px-6 text-center">
+                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] mb-12 relative">
+                        <span className="relative z-10">Contact</span>
+                        <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#00FFFF] rounded-full animate-pulse-light"></span>
+                    </h2>
+                    <p className="text-xl text-gray-300 mb-8 font-inter leading-relaxed">
+                        Ready to connect? Send a data packet or link up on the networks below.
                     </p>
-                    <div className="mt-8">
-                        <a
-                            href={`mailto:${CONTACT_INFO.email}`}
-                            className="inline-block bg-white text-emerald-800 font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out transform"
-                        >
-                            Email Me
+                    <div className="flex justify-center space-x-8 mb-12">
+                        <a href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-zinc-800 border border-[#3A3A4A] hover:border-[#00F0FF] text-gray-300 hover:text-[#00F0FF] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-[#00F0FF]/30" aria-label="GitHub Profile">
+                            <Github className="w-10 h-10" />
+                        </a>
+                        <a href={`mailto:${CONTACT_INFO.email}`} className="p-4 rounded-full bg-zinc-800 border border-[#3A3A4A] hover:border-[#00F0FF] text-gray-300 hover:text-[#00F0FF] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-[#00F0FF]/30" aria-label="Email Me">
+                            <Mail className="w-10 h-10" />
+                        </a>
+                        <a href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-zinc-800 border border-[#3A3A4A] hover:border-[#00F0FF] text-gray-300 hover:text-[#00F0FF] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-[#00F0FF]/30" aria-label="LinkedIn Profile">
+                            <Linkedin className="w-10 h-10" />
                         </a>
                     </div>
+                    {/* Optional: Add a simple contact form here with cyberpunk styling */}
                 </div>
             </SectionWrapper>
 
@@ -531,7 +676,7 @@ export default function PortfolioPage() {
             {showScrollToTop && (
                 <button
                     onClick={scrollToTop}
-                    className="fixed bottom-8 right-8 bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:bg-emerald-700 transition-all duration-300 ease-in-out transform hover:scale-110 z-50"
+                    className="fixed bottom-8 right-8 p-4 bg-[#00F0FF] text-[#100F1A] rounded-full shadow-lg hover:shadow-xl hover:bg-[#00FFFF] transition-all duration-300 z-50 animate-pulse-light"
                     aria-label="Scroll to top"
                 >
                     <ArrowUp className="w-6 h-6" />
