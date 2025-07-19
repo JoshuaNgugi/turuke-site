@@ -1,7 +1,13 @@
 'use client'; // This directive marks the component as a Client Component
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Code, Smartphone, Terminal, Rocket, Github, Mail, Linkedin, Atom, Type, Server, Database, Cloud, Package, GitBranch, LayoutDashboard, Component, FileDown, Menu, X, ArrowUp } from 'lucide-react';
+import Image from 'next/image'; // Import Next.js Image component
+import { Orbitron, Inter } from 'next/font/google'; // Import fonts from next/font/google
+import { Code, Smartphone, Terminal, Rocket, Github, Mail, Linkedin, Atom, Type, Server, Database, Cloud, Package, GitBranch, LayoutDashboard, FileDown, Menu, X, ArrowUp } from 'lucide-react'; // Removed 'Component'
+
+// Initialize fonts
+const orbitron = Orbitron({ subsets: ['latin'], weight: ['400', '700'] });
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
 // Define constants for reusability and easy updates
 const CONTACT_INFO = {
@@ -202,10 +208,16 @@ const Header = () => (
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center md:justify-between">
             <div className="md:w-1/3 flex justify-center mb-8 md:mb-0 md:mr-8">
-                <img
+                {/* Replaced <img> with <Image /> from next/image */}
+                <Image
                     src="/images/prog.svg"
                     alt="Programming illustration"
-                    className="w-48 sm:w-64 md:w-full h-auto object-contain rounded-full shadow-lg shadow-[#00F0FF]/50 animate-wave"
+                    // For responsive images that fill their container, use fill and set parent to relative
+                    fill={true}
+                    style={{ objectFit: 'contain' }}
+                    className="rounded-full shadow-lg shadow-[#00F0FF]/50 animate-wave !relative !h-auto !w-auto" // Ensure relative positioning for fill
+                    priority // Prioritize this image for LCP
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Responsive sizes
                     onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
@@ -214,16 +226,16 @@ const Header = () => (
                 />
             </div>
             <div className="md:w-2/3 text-center md:text-left">
-                <h1 className="text-5xl sm:text-6xl font-orbitron font-extrabold text-[#00F0FF] leading-tight tracking-wide animate-glitch"
+                <h1 className={`${orbitron.className} text-5xl sm:text-6xl font-extrabold text-[#00F0FF] leading-tight tracking-wide animate-glitch`}
                     data-text="Joshua Ngugi" // Used for glitch effect
                     style={{ textShadow: '0 0 10px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.2)' }}>
                     Joshua Ngugi
                 </h1>
-                <p className="mt-4 text-2xl text-[#FF00FF] font-inter font-semibold">
+                <p className={`${inter.className} mt-4 text-2xl text-[#FF00FF] font-semibold`}>
                     Software Engineer | Full-Stack Developer
                 </p>
-                <p className="mt-8 text-lg text-gray-300 font-inter leading-relaxed">
-                    I am a highly accomplished and results-driven Software Engineer with over 7 years of experience in designing, developing, and leading complex software solutions across mobile, web, and backend systems. My expertise spans the entire software development lifecycle, from initial concept and architectural design to deployment, post-launch optimization, and strategic product evolution. I excel in building scalable, secure, and user-centric applications, consistently translating intricate business needs into robust technical solutions. My work is defined by a commitment to engineering excellence, a passion for problem-solving, and a proven ability to lead and mentor high-performing teams.
+                <p className={`${inter.className} mt-8 text-lg text-gray-300 leading-relaxed`}>
+                    I am a highly accomplished and results-driven Software Engineer with over 6 years of experience in designing, developing, and leading complex software solutions across mobile, web, and backend systems. My expertise spans the entire software development lifecycle, from initial concept and architectural design to deployment, post-launch optimization, and strategic product evolution. I excel in building scalable, secure, and user-centric applications, consistently translating intricate business needs into robust technical solutions. My work is defined by a commitment to engineering excellence, a passion for problem-solving, and a proven ability to lead and mentor high-performing teams.
                 </p>
             </div>
         </div>
@@ -236,13 +248,13 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkT
 
     return (
         <div className="relative p-8 bg-zinc-800 rounded-xl border border-[#3A3A4A] hover:border-[#00F0FF] hover:shadow-lg hover:shadow-[#00F0FF]/30 transition-all duration-300 ease-in-out transform hover:-translate-y-2 group">
-            <h3 className="text-3xl font-orbitron font-bold text-[#00F0FF] mb-3 flex items-center">
+            <h3 className={`${orbitron.className} text-3xl font-bold text-[#00F0FF] mb-3 flex items-center`}>
                 {IconComponent && <IconComponent className="w-8 h-8 mr-3 text-[#FF00FF] group-hover:animate-glitch-icon" />}
                 {title}
             </h3>
-            {role && <p className="text-xl font-semibold text-gray-200 mb-1 font-inter">{role}</p>}
-            {duration && <p className="text-lg text-gray-400 mb-4 font-inter">{duration}</p>}
-            <ul className="mt-4 text-gray-300 text-lg leading-relaxed flex-grow list-disc pl-5 space-y-3 font-inter">
+            {role && <p className={`${inter.className} text-xl font-semibold text-gray-200 mb-1`}>{role}</p>}
+            {duration && <p className={`${inter.className} text-lg text-gray-400 mb-4`}>{duration}</p>}
+            <ul className={`${inter.className} mt-4 text-gray-300 text-lg leading-relaxed flex-grow list-disc pl-5 space-y-3`}>
                 {description.map((point, index) => (
                     <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
                 ))}
@@ -252,7 +264,7 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkT
                 <div className="mt-6">
                     <button
                         onClick={() => setShowImages(!showImages)}
-                        className="text-[#FF00FF] hover:text-[#00F0FF] transition-colors duration-200 flex items-center font-semibold mb-4"
+                        className={`${inter.className} text-[#FF00FF] hover:text-[#00F0FF] transition-colors duration-200 flex items-center font-semibold mb-4`}
                     >
                         {showImages ? 'Hide Visual Data [-]' : 'Access Visual Data [+]'}
                     </button>
@@ -260,15 +272,19 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkT
                         <div className="space-y-6 animate-fade-in-images">
                             {imageCategories.map((category, catIndex) => (
                                 <div key={catIndex}>
-                                    {category.title && <h4 className="text-xl font-orbitron font-semibold text-[#00FFFF] mb-3 border-b border-[#3A3A4A] pb-2">{category.title}</h4>}
+                                    {category.title && <h4 className={`${orbitron.className} text-xl font-semibold text-[#00FFFF] mb-3 border-b border-[#3A3A4A] pb-2`}>{category.title}</h4>}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {category.urls.map((url, imgIndex) => (
-                                            <img
+                                            // Replaced <img> with <Image /> from next/image
+                                            <Image
                                                 key={`${catIndex}-${imgIndex}`}
                                                 src={url}
                                                 alt={`${category.title} Screenshot ${imgIndex + 1}`}
-                                                className="w-full h-auto rounded-lg shadow-md object-cover border border-[#3A3A4A]"
+                                                width={400} // Example width, adjust as needed or use fill
+                                                height={225} // Example height, adjust as needed or use fill
+                                                className="rounded-lg shadow-md object-cover border border-[#3A3A4A]"
                                                 loading="lazy"
+                                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw" // Example sizes
                                                 onError={(e) => {
                                                     const target = e.target as HTMLImageElement;
                                                     target.onerror = null;
@@ -289,7 +305,7 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, description, link, linkT
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center px-6 py-3 border border-[#00F0FF] text-[#00F0FF] font-semibold rounded-md shadow-lg shadow-[#00F0FF]/20 hover:bg-[#00F0FF] hover:text-[#100F1A] transition-all duration-300 font-inter group-hover:animate-pulse-light"
+                    className={`${inter.className} mt-6 inline-flex items-center px-6 py-3 border border-[#00F0FF] text-[#00F0FF] font-semibold rounded-md shadow-lg shadow-[#00F0FF]/20 hover:bg-[#00F0FF] hover:text-[#100F1A] transition-all duration-300 group-hover:animate-pulse-light`}
                 >
                     {linkText}
                     <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -312,7 +328,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ icon: Icon, name }) => (
     <div className="flex flex-col items-center p-4 bg-zinc-800 rounded-xl shadow-md shadow-zinc-700/30 hover:shadow-lg hover:shadow-[#00F0FF]/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 group relative overflow-hidden">
         <div className="absolute inset-0 bg-[#00F0FF] opacity-0 group-hover:opacity-10 transition-opacity duration-500 animate-pulse-slow rounded-xl"></div>
         {Icon && <Icon className="w-10 h-10 text-[#00F0FF] mb-3 group-hover:animate-wiggle relative z-10" />}
-        <span className="text-lg font-medium text-gray-100 text-center font-inter relative z-10">{name}</span>
+        <span className={`${inter.className} text-lg font-medium text-gray-100 text-center relative z-10`}>{name}</span>
     </div>
 );
 
@@ -320,7 +336,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ icon: Icon, name }) => (
 const Footer = () => (
     <footer className="bg-[#100F1A] text-gray-400 text-sm py-8 px-6 rounded-t-3xl shadow-inner shadow-[#00F0FF]/20">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-            <p className="mb-4 sm:mb-0 font-inter">© {new Date().getFullYear()} Joshua Ngugi</p>
+            <p className={`${inter.className} mb-4 sm:mb-0`}>© {new Date().getFullYear()} Joshua Ngugi</p>
             <div className="flex space-x-6">
                 <a href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF] transition-colors duration-200" aria-label="GitHub Profile">
                     <Github className="w-6 h-6" />
@@ -355,16 +371,18 @@ const SectionWrapper: React.FC<{ id: string; children: React.ReactNode; classNam
             { threshold: 0.1 }
         );
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
+        // Capture current ref value for cleanup
+        const currentRef = sectionRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
+            if (currentRef) { // Use the captured value for cleanup
+                observer.unobserve(currentRef);
             }
         };
-    }, [id, onIntersect]);
+    }, [id, onIntersect]); // Removed sectionRef from dependencies as currentRef is captured
 
     return (
         <section
@@ -412,9 +430,8 @@ export default function App() { // Changed to App for default export
     }, []);
 
     return (
-        <div className="bg-[#100F1A] text-gray-100 font-inter antialiased">
-            {/* Google Fonts Import */}
-            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <div className={`${inter.className} bg-[#100F1A] text-gray-100 antialiased`}>
+            {/* Google Fonts Import - Removed as using next/font */}
 
             {/* Define custom keyframes for animations */}
             <style jsx global>{`
@@ -491,16 +508,6 @@ export default function App() { // Changed to App for default export
                     animation: pulse-slow 2s infinite ease-in-out;
                 }
 
-                /* Custom 3D tilt on hover for DetailCard - removed for new hover */
-                /*
-                .group:hover .hover\\:rotate-x-5 {
-                    transform: rotateX(5deg);
-                }
-                .group:hover .hover\\:rotate-y-5 {
-                    transform: rotateY(5deg);
-                }
-                */
-
                 @keyframes glitch-icon {
                     0%, 100% { transform: translate(0, 0); }
                     20% { transform: translate(-2px, 2px); }
@@ -533,13 +540,13 @@ export default function App() { // Changed to App for default export
             {/* Navigation Bar: Sticky to stay at the top while scrolling */}
             <nav className="sticky top-0 z-50 bg-[#100F1A] shadow-lg shadow-[#00F0FF]/20 py-4 px-6 rounded-b-lg border-b border-[#3A3A4A]">
                 <div className="max-w-6xl mx-auto flex justify-between items-center">
-                    <span className="text-2xl font-orbitron font-bold text-[#00F0FF]">Joshua Ngugi</span>
+                    <span className={`${orbitron.className} text-2xl font-bold text-[#00F0FF]`}>Joshua Ngugi</span>
                     <div className="space-x-6 hidden md:flex">
-                        <a href="#home" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'home' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Home</a>
-                        <a href="#work-experience" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'work-experience' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Work Experience</a>
-                        <a href="#projects" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'projects' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Projects</a>
-                        <a href="#skills" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'skills' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Skills</a>
-                        <a href="#contact" className={`text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium font-inter relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'contact' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Contact</a>
+                        <a href="#home" className={`${inter.className} text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'home' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Home</a>
+                        <a href="#work-experience" className={`${inter.className} text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'work-experience' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Work Experience</a>
+                        <a href="#projects" className={`${inter.className} text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'projects' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Projects</a>
+                        <a href="#skills" className={`${inter.className} text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'skills' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Skills</a>
+                        <a href="#contact" className={`${inter.className} text-gray-300 hover:text-[#00F0FF] transition-colors duration-200 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#FF00FF] after:transition-all after:duration-300 hover:after:w-full ${activeSection === 'contact' ? 'text-[#00F0FF] font-bold after:w-full' : ''}`}>Contact</a>
                     </div>
                     <div className="md:hidden">
                         <button
@@ -563,11 +570,11 @@ export default function App() { // Changed to App for default export
                     >
                         <X className="w-8 h-8" />
                     </button>
-                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Home</a>
-                    <a href="#work-experience" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Work Experience</a>
-                    <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Projects</a>
-                    <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Skills</a>
-                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200 font-inter">Contact</a>
+                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className={`${inter.className} text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200`}>Home</a>
+                    <a href="#work-experience" onClick={() => setIsMobileMenuOpen(false)} className={`${inter.className} text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200`}>Work Experience</a>
+                    <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className={`${inter.className} text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200`}>Projects</a>
+                    <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className={`${inter.className} text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200`}>Skills</a>
+                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className={`${inter.className} text-3xl font-bold text-[#00F0FF] hover:text-[#FF00FF] transition-colors duration-200`}>Contact</a>
                 </div>
             )}
 
@@ -576,7 +583,7 @@ export default function App() { // Changed to App for default export
             {/* Work Experience Section */}
             <SectionWrapper id="work-experience" className="py-24" onIntersect={handleSectionIntersect} skew={-2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                    <h2 className={`${orbitron.className} text-4xl font-bold text-[#00F0FF] text-center mb-16 relative`}>
                         <span className="relative z-10">Work Experience</span>
                         <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#FF00FF] rounded-full animate-pulse-light"></span>
                     </h2>
@@ -601,7 +608,7 @@ export default function App() { // Changed to App for default export
             {/* Projects Section */}
             <SectionWrapper id="projects" className="py-24" onIntersect={handleSectionIntersect} skew={2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                    <h2 className={`${orbitron.className} text-4xl font-bold text-[#00F0FF] text-center mb-16 relative`}>
                         <span className="relative z-10">Personal Projects</span>
                         <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#00FFFF] rounded-full animate-pulse-light"></span>
                     </h2>
@@ -624,7 +631,7 @@ export default function App() { // Changed to App for default export
             {/* Skills Section */}
             <SectionWrapper id="skills" className="py-24" onIntersect={handleSectionIntersect} skew={-2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
-                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] text-center mb-16 relative">
+                    <h2 className={`${orbitron.className} text-4xl font-bold text-[#00F0FF] text-center mb-16 relative`}>
                         <span className="relative z-10">Skills Matrix</span>
                         <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#FF00FF] rounded-full animate-pulse-light"></span>
                     </h2>
@@ -648,11 +655,11 @@ export default function App() { // Changed to App for default export
             {/* Contact Section */}
             <SectionWrapper id="contact" className="py-24" onIntersect={handleSectionIntersect} skew={2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6 text-center">
-                    <h2 className="text-4xl font-orbitron font-bold text-[#00F0FF] mb-12 relative">
+                    <h2 className={`${orbitron.className} text-4xl font-bold text-[#00F0FF] mb-12 relative`}>
                         <span className="relative z-10">Contact</span>
                         <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#00FFFF] rounded-full animate-pulse-light"></span>
                     </h2>
-                    <p className="text-xl text-gray-300 mb-8 font-inter leading-relaxed">
+                    <p className={`${inter.className} text-xl text-gray-300 mb-8 leading-relaxed`}>
                         Ready to connect? Send a data packet or link up on the networks below.
                     </p>
                     <div className="flex justify-center space-x-8 mb-12">
