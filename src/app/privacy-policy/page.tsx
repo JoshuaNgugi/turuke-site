@@ -172,13 +172,6 @@ export default function PrivacyPolicyPage() {
                         </ul>
                     </section>
                 </div>
-
-                <div className="mt-12 text-center text-sm text-gray-500">
-                    <p>&copy; {currentYear} Turuke. All rights reserved.</p>
-                    <p className="mt-2 text-red-600 font-semibold">
-                        THIS IS A DRAFT. CONSULT A LEGAL PROFESSIONAL FOR FINAL DOCUMENTATION AND COMPLIANCE WITH KENYAN DATA PROTECTION LAWS.
-                    </p>
-                </div>
             </div>
         </div>
     );
