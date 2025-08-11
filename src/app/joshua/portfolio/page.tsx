@@ -16,7 +16,8 @@ const CONTACT_INFO = {
     linkedin: "https://www.linkedin.com/in/joshua-ngugi/",
     turukeMobile: "https://github.com/JoshuaNgugi/turuke-mobile",
     moolahCheckGithub: "https://github.com/JoshuaNgugi/moolah-check",
-    krossroadsPlayStore: "https://play.google.com/store/apps/details?id=com.alliedcommerce.seller.pos&hl=en"
+    krossroadsPlayStore: "https://play.google.com/store/apps/details?id=com.alliedcommerce.seller.pos&hl=en",
+    simama: "https://github.com/JoshuaNgugi/simama"
 };
 
 // Define an interface for the image categories
@@ -131,6 +132,52 @@ const workExperienceData: ExperienceItem[] = [
 
 // Data for Projects
 const projectsData: ProjectItem[] = [
+    {
+        id: "simama-health",
+        title: "Simama Health Management Platform – Helping You Stand Strong Again",
+        description: formatDescription([
+            "Simama is a modern, full-stack hospital management platform that streamlines healthcare interactions between doctors, pharmacists, and patients. Designed with a strong focus on usability and security, it integrates prescription management, patient records, and role-based dashboards into one intuitive system.",
+            "I developed both the frontend and backend as a fully functional end-to-end solution:",
+            "**Frontend (Next.js 13, React, TypeScript, Tailwind CSS)**",
+            "Built a responsive, modern UI with role-specific dashboards for doctors, pharmacists, and (future) patients.",
+            "Implemented secure JWT-based authentication with role-based access control.",
+            "Created dynamic prescription workflows including creation, fulfillment, and deletion, with toast notifications and client-side pagination.",
+            "Integrated robust form handling and validation using react-hook-form and Zod.",
+
+            "**Backend (.NET 8, ASP.NET Core, PostgreSQL, Entity Framework Core)**",
+            "Designed RESTful APIs following Clean Architecture principles.",
+            "Implemented secure authentication and authorization with JWT tokens.",
+            "Built CRUD endpoints for prescriptions, drugs, and user management with role-based restrictions.",
+            "Deployed database schema with PostgreSQL, leveraging EF Core migrations.",
+            "Containerized the application for easy deployment with Docker.",
+
+            "**Key Achievements:**",
+            "Delivered a secure, scalable platform capable of handling multiple user roles and workflows.",
+            "Streamlined prescription fulfillment process, reducing time from creation to completion.",
+            "Created a flexible architecture that allows rapid future expansion (e.g., patient logins, advanced analytics, messaging system).",
+            
+            "**Tech Stack:**",
+            "Frontend: Next.js 13, React, TypeScript, Tailwind CSS, Axios, react-hook-form, Zod, HeroIcons, date-fns",
+            "Backend: C#, ASP.NET Core Web API, PostgreSQL, Entity Framework Core, JWT Auth, Docker",
+            "Tools: Git, GitHub, Docker Compose"
+        ]),
+        link: CONTACT_INFO.simama,
+        linkText: "View on GitHub",
+        icon: Code,
+        imageCategories: [
+            {
+                title: "Web Screenshots",
+                urls: [
+                    "/images/simama_landing.jpg",
+                    "/images/simama_login.jpg",
+                    "/images/simama_register.jpg",
+                    "/images/simama_doctor_dash.jpg",
+                    "/images/simama_doctor_prescriptions_create.jpg",
+                    "/images/simama_pharmacist_dash.jpg",
+                ],
+            },
+        ],
+    },
     {
         id: "turuke-app",
         title: "Turuke App – Founder & Developer",
@@ -609,7 +656,7 @@ export default function App() { // Changed to App for default export
             <SectionWrapper id="projects" className="py-24" onIntersect={handleSectionIntersect} skew={2} bgColor="bg-zinc-900">
                 <div className="max-w-6xl mx-auto px-6">
                     <h2 className={`${orbitron.className} text-4xl font-bold text-[#00F0FF] text-center mb-16 relative`}>
-                        <span className="relative z-10">Personal Projects</span>
+                        <span className="relative z-10">Projects</span>
                         <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-24 h-1 bg-[#00FFFF] rounded-full animate-pulse-light"></span>
                     </h2>
                     <div className="space-y-20"> {/* Stacked layout with more vertical space */}

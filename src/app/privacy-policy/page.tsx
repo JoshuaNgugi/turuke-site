@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function PrivacyPolicyPage() {
-    const currentYear = new Date().getFullYear();
-
     return (
         <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-sans text-gray-800">
             <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
@@ -20,7 +18,7 @@ export default function PrivacyPolicyPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
                         <p>
-                            Turuke ("we," "our," or "us") is committed to protecting the privacy of our users. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the Turuke mobile application (the "Service").
+                            Turuke (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting the privacy of our users. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the Turuke mobile application (the &quot;Service&quot;).
                         </p>
                         <p className="mt-2">
                             By using our Service, you agree to the collection and use of information in accordance with this policy. If you do not agree with the terms of this Privacy Policy, please do not use the Service.
@@ -47,7 +45,7 @@ export default function PrivacyPolicyPage() {
                                 <ul className="list-circle list-inside ml-5 mt-1">
                                     <li><strong>Flock Data:</strong> Details about your poultry flocks (e.g., flock names, breeds, number of birds, acquisition dates).</li>
                                     <li><strong>Egg Production Data:</strong> Daily egg counts, production records, and associated notes.</li>
-                                    <li><strong>Farm Performance Data:</strong> Any other data you input to track expenses, feed consumption, mortality, or other aspects of your farm's operation.</li>
+                                    <li><strong>Farm Performance Data:</strong> Any other data you input to track expenses, feed consumption, mortality, or other aspects of your farm&apos;s operation.</li>
                                 </ul>
                             </li>
                             <li>
@@ -133,7 +131,7 @@ export default function PrivacyPolicyPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Offline Mode Data Handling</h2>
                         <p>
-                            Turuke offers an "Essential Offline Access" feature, allowing you to input data even without an internet connection. When you are offline, your data is stored locally on your device. Once your device reconnects to the internet, this locally stored data will automatically sync with our secure servers to ensure your records are up-to-date and accessible across devices (if multi-device access is supported). We take measures to ensure the integrity and security of your data during both offline storage and online synchronization.
+                            Turuke offers an &quot;Essential Offline Access&quot; feature, allowing you to input data even without an internet connection. When you are offline, your data is stored locally on your device. Once your device reconnects to the internet, this locally stored data will automatically sync with our secure servers to ensure your records are up-to-date and accessible across devices (if multi-device access is supported). We take measures to ensure the integrity and security of your data during both offline storage and online synchronization.
                         </p>
                     </section>
 
@@ -147,7 +145,7 @@ export default function PrivacyPolicyPage() {
 
                     {/* Children's Privacy */}
                     <section>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Children's Privacy</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Children&apos;s Privacy</h2>
                         <p>
                             Our Service is not intended for use by individuals under the age of 18. We do not knowingly collect personally identifiable information from children under 18. If you are a parent or guardian and you are aware that your child has provided us with personal data, please contact us. If we become aware that we have collected personal data from children without verification of parental consent, we take steps to remove that information from our servers.
                         </p>
@@ -157,7 +155,7 @@ export default function PrivacyPolicyPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Changes to This Privacy Policy</h2>
                         <p>
-                            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Effective Date" at the top. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+                            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Effective Date&quot; at the top. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
                         </p>
                     </section>
 

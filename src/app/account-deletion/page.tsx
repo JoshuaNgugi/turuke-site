@@ -50,7 +50,7 @@ export default function AccountDeletionPage() {
               <li><strong>User Profile Information:</strong> This includes your name, contact details, and any other personal information provided during registration.</li>
               <li><strong>Flock Management Data:</strong> All records related to your poultry flocks, including flock names, breeds, and numbers.</li>
               <li><strong>Egg Production Records:</strong> Daily egg counts, production trends, and historical data.</li>
-              <li><strong>Farm Performance Insights:</strong> Any generated reports, analytics, or aggregated data specific to your farm's performance within the app.</li>
+              <li><strong>Farm Performance Insights:</strong> Any generated reports, analytics, or aggregated data specific to your farm&apos;s performance within the app.</li>
               <li><strong>Login Credentials:</strong> Your username and hashed password.</li>
             </ul>
           </div>
